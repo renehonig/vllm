@@ -469,7 +469,9 @@ class _AttachedAudit(ple_layer_module.Qwen3_8FlashNextNGramEmbedding):
         self._weight_scale_2_loaded = False
         self._embedding_validated = False
         self.split_ngram_parts = 4
-        self._plan = SimpleNamespace(
+        # The layer reads its table geometry from ``_table_layout`` on the
+        # staged-preparation branch and from ``_plan`` before it.
+        self._table_layout = self._plan = SimpleNamespace(
             padded_vocab_size=8,
             shard_start=0,
             shard_end=8,
